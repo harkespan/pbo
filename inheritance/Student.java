@@ -4,6 +4,7 @@ public class Student extends Person{
 	String nim;
 	public Student() {
 		System.out.println("Inside Student:Constructor");
+		super.name="Anda";
 	}
 	
 	public String getNim()
@@ -22,6 +23,11 @@ public class Student extends Person{
 	public void job()
 	{
 		System.out.println("Pekerjaan : Mahasiswa");
+	}
+	
+	public String getName() {
+		System.out.println("Student name: "+name);
+		return name;
 	}
 		
 }
