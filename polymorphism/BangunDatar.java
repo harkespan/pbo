@@ -1,16 +1,21 @@
 package polymorphism;
 
 public class BangunDatar {
-	protected float panjang;
-	protected float lebar;
-	protected float tinggi;
-	protected float sisi;
+	protected double panjang;
+	protected double lebar;
+	protected double tinggi;
+	protected double sisi;
 	
 	public double luas()
 	{
 		double luas;
 		luas = panjang*lebar;
 		return luas;
+	}
+	
+	public double luas(double panjang, double tinggi)
+	{
+		return (panjang*tinggi)/2;
 	}
 	
 	public void cetakLuas(String tipe, double luas)

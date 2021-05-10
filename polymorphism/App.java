@@ -15,7 +15,7 @@ public class App {
 		bd = sikusiku;
 		bd.panjang = 10;
 		bd.tinggi = 5;
-		double luas1 = bd.luas();
+		double luas1 = bd.luas(bd.panjang, bd.tinggi);
 		bd.cetakLuas("Segitiga siku-siku", luas1);
 	}
 
