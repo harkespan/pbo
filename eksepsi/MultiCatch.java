@@ -11,6 +11,8 @@ public class MultiCatch {
 			Scanner s = new Scanner(System.in);
 			System.out.println("Masukkan angka: ");
 			c = s.nextInt();
+			int d = s.nextInt();
+			System.out.println(c/d);
 		}
 		catch(InputMismatchException e)
 		{
