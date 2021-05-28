@@ -15,7 +15,7 @@ public class Bank {
 		}
 		catch(InsufficientFundsException e)
 		{
-			System.out.println("Maaf saldo Anda tidak mencukupi Rp "+e.getAmount());
+			System.out.println("Maaf saldo yang akan Anda ambil kurang Rp "+e.getAmount()+" dari total permintaan Anda");
 			e.printStackTrace();
 		}
 
