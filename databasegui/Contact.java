@@ -20,6 +20,10 @@ import javax.swing.JScrollPane;
 import javax.swing.table.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import models.Contacts;
 
 public class Contact {
 
@@ -28,9 +32,9 @@ public class Contact {
 	private JTextField txtHp;
 	
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://127.0.0.1/test";
-    static final String USER = "username_db";
-    static final String PASS = "password_db";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1/<dbname>?autoReconnect=true&useSSL=false";
+    static final String USER = "<dbuser>";
+    static final String PASS = "<dbpassword>";
     
     static Connection conn;
     static Statement stmt;
@@ -112,6 +116,10 @@ public class Contact {
 		JLabel notif = new JLabel("");
 		notif.setBounds(27, 242, 262, 20);
 		frame.getContentPane().add(notif);
+		JLabel txtID = new JLabel("");
+		txtID.setVisible(false);
+		txtID.setBounds(27, 37, 70, 15);
+		frame.getContentPane().add(txtID);
 
 		JButton btnSimpan = new JButton("Simpan");
 		btnSimpan.addActionListener(new ActionListener() {
@@ -122,25 +130,90 @@ public class Contact {
 				
 				insert(nama,alamat,telp);//method digunakan untuk insert data
 				notif.setText("Input Data Berhasil!");
+				show();
 				txtNama.setText("");
 				txtAlamat.setText("");
 				txtHp.setText("");
 			}
 		});
-		btnSimpan.setBounds(397, 237, 117, 25);
+		btnSimpan.setBounds(356, 237, 117, 25);
 		frame.getContentPane().add(btnSimpan);
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.setVisible(false);
+		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(27, 335, 502, 327);
 		frame.getContentPane().add(scrollPane);
+		JButton btnHapus = new JButton("Hapus");
 		
 		tabelData = new JTable();
+		tabelData.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int row = tabelData.getSelectedRow();
+				if(row!=-1)
+				{
+					txtNama.setText(tabelData.getValueAt(row,1).toString());
+					txtAlamat.setText(tabelData.getValueAt(row, 2).toString());
+					txtHp.setText(tabelData.getValueAt(row, 3).toString());
+					txtID.setText(tabelData.getValueAt(row, 0).toString());
+					btnEdit.setVisible(true);
+					btnHapus.setVisible(true);
+					btnSimpan.setVisible(false);
+				}
+			}
+		});
 		
 		scrollPane.setViewportView(tabelData);
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String nama = txtNama.getText().toString().trim();
+				String alamat = txtAlamat.getText().toString().trim();
+				String telp = txtHp.getText().toString().trim();
+				String id = txtID.getText();
+				
+				update(id,nama,alamat,telp);
+				notif.setText("Update Data Berhasil!");
+				show();
+				txtNama.setText("");
+				txtAlamat.setText("");
+				txtHp.setText("");
+				btnSimpan.setVisible(true);
+				btnEdit.setVisible(false);
+				btnHapus.setVisible(false);
+			}
+		});
+		btnEdit.setBounds(281, 237, 117, 25);
+		frame.getContentPane().add(btnEdit);
+		
+		btnHapus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String id = txtID.getText();
+				delete(id);
+				notif.setText("Hapus data berhasil");
+				txtNama.setText("");
+				txtAlamat.setText("");
+				txtHp.setText("");
+				btnSimpan.setVisible(true);
+				btnEdit.setVisible(false);
+				btnHapus.setVisible(false);
+				show();
+			}
+		});
+		btnHapus.setVisible(false);
+		btnHapus.setBounds(412, 237, 117, 25);
+		frame.getContentPane().add(btnHapus);
+		
 		
 		
 	}
 	
+	protected int parseInt(String text) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	public void insert(String nama,String alamat, String telp)
 	{
 		try {
@@ -155,11 +228,12 @@ public class Contact {
             String sql = "INSERT INTO kontak (nama,alamat,telp) VALUES (?,?,?)";
             
             PreparedStatement pms = conn.prepareStatement(sql);
-            pms.setString(1,nama);
+            pms.setString(1, nama);
             pms.setString(2, alamat);
             pms.setString(3, telp);
             
             pms.execute();
+
             
            
             
@@ -180,14 +254,14 @@ public class Contact {
 			   
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("ID");
+            model.addColumn("No");
             model.addColumn("Nama");
             model.addColumn("Alamat");
             model.addColumn("Telp/HP");
  
             stmt = conn.createStatement();
             String sql = "SELECT * FROM kontak";
-            
+            int i = 1;
             rs = stmt.executeQuery(sql);
             while(rs.next()) {
             	model.addRow(new Object[] {
@@ -196,6 +270,7 @@ public class Contact {
             		rs.getString("alamat"),
             		rs.getString("telp")
             	});
+            	i++;
             }
             rs.close();
             conn.close();
@@ -215,4 +290,67 @@ public class Contact {
 		}
         
 	}
+	
+	public void update(String id, String nama, String alamat, String telp)
+	{
+		try {
+            Class.forName(JDBC_DRIVER);
+            
+   
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            
+ 
+            stmt = conn.createStatement();
+            
+            String sql = "UPDATE kontak SET nama=?,alamat=?,telp=? WHERE id=?";
+            
+            PreparedStatement pms = conn.prepareStatement(sql);
+            pms.setString(1, nama);
+            pms.setString(2, alamat);
+            pms.setString(3, telp);
+            pms.setString(4, id);
+            
+            pms.execute();
+
+            
+           
+            
+            stmt.close();
+            conn.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void delete(String id)
+	{
+		try {
+            Class.forName(JDBC_DRIVER);
+            
+   
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            
+ 
+            stmt = conn.createStatement();
+            
+            String sql = "DELETE FROM kontak WHERE id=?";
+            
+            PreparedStatement pms = conn.prepareStatement(sql);
+            pms.setString(1, id);
+            
+            pms.execute();
+
+            
+            stmt.close();
+            conn.close();
+            
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+	}
 }
+
+// array [0]{'nama','alamat','telp'}
+//array[1] {'nama','alamat','telp'}
+
