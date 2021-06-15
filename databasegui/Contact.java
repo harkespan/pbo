@@ -32,9 +32,9 @@ public class Contact {
 	private JTextField txtHp;
 	
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://127.0.0.1/<dbname>?autoReconnect=true&useSSL=false";
-    static final String USER = "<dbuser>";
-    static final String PASS = "<dbpassword>";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1/test?autoReconnect=true&useSSL=false";
+    static final String USER = "harkespan";
+    static final String PASS = "rahasia123";
     
     static Connection conn;
     static Statement stmt;
@@ -293,61 +293,12 @@ public class Contact {
 	
 	public void update(String id, String nama, String alamat, String telp)
 	{
-		try {
-            Class.forName(JDBC_DRIVER);
-            
-   
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            
- 
-            stmt = conn.createStatement();
-            
-            String sql = "UPDATE kontak SET nama=?,alamat=?,telp=? WHERE id=?";
-            
-            PreparedStatement pms = conn.prepareStatement(sql);
-            pms.setString(1, nama);
-            pms.setString(2, alamat);
-            pms.setString(3, telp);
-            pms.setString(4, id);
-            
-            pms.execute();
-
-            
-           
-            
-            stmt.close();
-            conn.close();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+		
 	}
 	
 	public void delete(String id)
 	{
-		try {
-            Class.forName(JDBC_DRIVER);
-            
-   
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            
- 
-            stmt = conn.createStatement();
-            
-            String sql = "DELETE FROM kontak WHERE id=?";
-            
-            PreparedStatement pms = conn.prepareStatement(sql);
-            pms.setString(1, id);
-            
-            pms.execute();
-
-            
-            stmt.close();
-            conn.close();
-            
-        } catch (Exception e) {
-        	e.printStackTrace();
-        }
+		
 	}
 }
 
