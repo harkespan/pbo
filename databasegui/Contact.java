@@ -259,12 +259,12 @@ public class Contact {
         
 	}
 	
-	public void update(String id, String nama, String alamat, String telp)
+	public void update()
 	{
 		
 	}
 	
-	public void delete(String id)
+	public void delete()
 	{
 		
 	}
