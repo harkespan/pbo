@@ -151,37 +151,14 @@ public class Contact {
 		tabelData.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int row = tabelData.getSelectedRow();
-				if(row!=-1)
-				{
-					txtNama.setText(tabelData.getValueAt(row,1).toString());
-					txtAlamat.setText(tabelData.getValueAt(row, 2).toString());
-					txtHp.setText(tabelData.getValueAt(row, 3).toString());
-					txtID.setText(tabelData.getValueAt(row, 0).toString());
-					btnEdit.setVisible(true);
-					btnHapus.setVisible(true);
-					btnSimpan.setVisible(false);
-				}
+				
 			}
 		});
 		
 		scrollPane.setViewportView(tabelData);
 		btnEdit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String nama = txtNama.getText().toString().trim();
-				String alamat = txtAlamat.getText().toString().trim();
-				String telp = txtHp.getText().toString().trim();
-				String id = txtID.getText();
-				
-				update(id,nama,alamat,telp);
-				notif.setText("Update Data Berhasil!");
-				show();
-				txtNama.setText("");
-				txtAlamat.setText("");
-				txtHp.setText("");
-				btnSimpan.setVisible(true);
-				btnEdit.setVisible(false);
-				btnHapus.setVisible(false);
+			
 			}
 		});
 		btnEdit.setBounds(281, 237, 117, 25);
@@ -189,16 +166,7 @@ public class Contact {
 		
 		btnHapus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String id = txtID.getText();
-				delete(id);
-				notif.setText("Hapus data berhasil");
-				txtNama.setText("");
-				txtAlamat.setText("");
-				txtHp.setText("");
-				btnSimpan.setVisible(true);
-				btnEdit.setVisible(false);
-				btnHapus.setVisible(false);
-				show();
+			
 			}
 		});
 		btnHapus.setVisible(false);
