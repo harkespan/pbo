@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `parkir`;
 CREATE TABLE `parkir`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nopol` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `tipe` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'Motor, Mobil, Truk',
   `tanggal` date NOT NULL,
