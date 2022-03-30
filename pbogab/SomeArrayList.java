@@ -19,6 +19,7 @@ public class SomeArrayList {
 		int x = inp.nextInt();
 		
 		i.add(x);
+		i.add(4, 9);
 		
 		int jmlData = i.size(); //untuk mencari jumlah data pada arraylist
 		
