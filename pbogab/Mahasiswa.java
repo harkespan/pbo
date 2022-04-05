@@ -10,14 +10,14 @@ package pbogab;
  */
 
 public class Mahasiswa {
-	String nim;
-	String nama;
-	Double ipk;
+	String nim;A11.2018.11605
+	String nama;guntur
+	Double ipk;3,50
 	
 	public Mahasiswa(String nim, String nama, Double ipk) {
-		this.nim = nim;
-		this.nama = nama;
-		this.ipk = ipk;
+		this.nim = nim;A11.2018.11605
+		this.nama = nama;guntur
+		this.ipk = ipk;3,50
 	}
 	
 	
