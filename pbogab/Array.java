@@ -7,7 +7,13 @@ public class Array {
 		Scanner inp = new Scanner(System.in);
 		System.out.print("Masukkan Jumlah Data: ");
 		jmlData = inp.nextInt();
-
-		//the rest of code
+		
+		ArrayPrototype ap = new ArrayPrototype();
+		
+		ap.setArray(jmlData);
+		
+		ap.cetakArray();
+		
+		System.out.println("Jumlah angka = "+ap.sumOfArray());
 	}
 }

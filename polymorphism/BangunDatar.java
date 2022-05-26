@@ -12,7 +12,12 @@ public class BangunDatar {
 		luas = panjang*lebar;
 		return luas;
 	}
-	
+	/**
+	 * overload
+	 * @param panjang
+	 * @param tinggi
+	 * @return
+	 */
 	public double luas(double panjang, double tinggi)
 	{
 		return (panjang*tinggi)/2;
