@@ -5,17 +5,15 @@ public class TestAc {
 	public static void main(String[] args) {
 		AC ac = new AC(20);
 		ac.setOn();
-		System.out.println("Suhu AC dinaikkan menjadi: "+ac.setSuhu());
-		
+		ac.setCool();
+		ac.setChill();
+		ac.setDry();
+		ac.setSuhu();
+		ac.setDry();
+		ac.setSuhu();
 		ac.checkSuhu();
-		ac.setCool();
-		
+		ac.setChill();
 		ac.checkMode();
-		
-		ac.setOff();
-		ac.setCool();
-
-
 	}
 
 }

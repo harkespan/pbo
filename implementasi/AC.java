@@ -45,13 +45,22 @@ public class AC implements AirConditioner {
 	@Override
 	public int setSuhu()
 	{
-		return this.suhu+=1;
+		//cek apakah AC nyala/mati. Kalau nyala bisa set suhu, kalau mati tidak bisa
+		if(this.acState == acStateOn)
+		{
+			return this.suhu+=1;			
+		}
+		else
+		{
+			return this.suhu = 0;
+		}
+		
+		//berikan parameter naik/turun, jika naik this.suhu+=1, jika turun this.suhu-=1
 	}
 
 	@Override
 	public void setCool() {
-		if(this.acState == 1)
-		{
+		//cek apakah ac nyala/mati
 			if(this.coolState == 0)
 			{
 				this.coolState = 1;
@@ -65,15 +74,12 @@ public class AC implements AirConditioner {
 				System.out.println("Mode sejuk sudah nyala dengan suhu "+this.suhu);
 			}			
 		}
-		else
-		{
-			System.out.println("Nyalakan dulu AC-nya");
-		}
 
-	}
+
 
 	@Override
 	public void setDry() {
+		//cek apakah AC nyala/mati
 		if(this.dryState == 0)
 		{
 			this.dryState = 1;
@@ -91,6 +97,7 @@ public class AC implements AirConditioner {
 
 	@Override
 	public void setChill() {
+		//cek apakah AC nyala/mati
 		if(this.chillState == 0)
 		{
 			this.chillState = 1;
@@ -113,6 +120,7 @@ public class AC implements AirConditioner {
 	
 	public void checkMode()
 	{
+		//cek apakah AC nyala/mati
 		if(this.chillState == 1)
 		{
 			System.out.println("Mode Dingin aktif");
