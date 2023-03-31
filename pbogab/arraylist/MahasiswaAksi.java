@@ -17,7 +17,7 @@ public class MahasiswaAksi {
        // menampilkan data mahasiswa dan IPK menggunakan Iterator
        Iterator<Mahasiswa> iterator = mahasiswaList.iterator();
        while (iterator.hasNext()) {
-           Mahasiswa mahasiswa = 
+
            System.out.println("Nama: " + mahasiswa.getNama() + ", NIM: " + mahasiswa.getNim() + ", IPK: " );
        }
     }
