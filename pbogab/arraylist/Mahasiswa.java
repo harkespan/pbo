@@ -11,7 +11,6 @@ class Mahasiswa {
     public Mahasiswa(String nama, String nim, ArrayList<Double> nilai) {
         this.nama = nama;
         this.nim = nim;
-        this.nilai = nilai;
     }
 
     public String getNama() {

@@ -8,7 +8,7 @@ public class MahasiswaAksi {
         ArrayList<Mahasiswa> mahasiswaList = new ArrayList<Mahasiswa>();
 
        // menambahkan data mahasiswa ke dalam ArrayList
-       ArrayList<Double> nilai1 = new ArrayList<Double>();
+       ArrayList<Double> nilai1 = 
        nilai1.add(3.5);
        nilai1.add(3.0);
        nilai1.add(4.0);
@@ -17,8 +17,8 @@ public class MahasiswaAksi {
        // menampilkan data mahasiswa dan IPK menggunakan Iterator
        Iterator<Mahasiswa> iterator = mahasiswaList.iterator();
        while (iterator.hasNext()) {
-           Mahasiswa mahasiswa = iterator.next();
-           System.out.println("Nama: " + mahasiswa.getNama() + ", NIM: " + mahasiswa.getNim() + ", IPK: " + mahasiswa.hitungIPK());
+           Mahasiswa mahasiswa = 
+           System.out.println("Nama: " + mahasiswa.getNama() + ", NIM: " + mahasiswa.getNim() + ", IPK: " );
        }
     }
 }
