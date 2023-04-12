@@ -8,7 +8,7 @@ public class MahasiswaAksi {
         ArrayList<Mahasiswa> mahasiswaList = new ArrayList<Mahasiswa>();
 
        // menambahkan data mahasiswa ke dalam ArrayList
-       ArrayList<Double> nilai1 = 
+       ArrayList<Double> nilai1 = new ArrayList<Double>();
        nilai1.add(3.5);
        nilai1.add(3.0);
        nilai1.add(4.0);
