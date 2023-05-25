@@ -1,6 +1,5 @@
 package arraylist;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 
 class Mahasiswa {
