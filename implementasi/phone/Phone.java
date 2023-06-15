@@ -12,4 +12,9 @@ public interface Phone
     void volumeUp();
     void volumeDown();
     int getVolume();
+    int getBalance();
+    void getContact(String nama);
+    void listContact();
+    void getBatteryLevel();
+    void insertContact(String nama, String nomor);
 }
