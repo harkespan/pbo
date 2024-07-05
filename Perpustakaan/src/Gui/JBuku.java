@@ -57,6 +57,7 @@ public class JBuku extends javax.swing.JFrame {
         btnEdit = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
         btnKosong = new javax.swing.JButton();
+        txtID = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,6 +113,11 @@ public class JBuku extends javax.swing.JFrame {
         });
 
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnHapus.setText("Hapus");
 
@@ -142,7 +148,10 @@ public class JBuku extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtJudul, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtJudul, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtID))
                             .addComponent(txtStok, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dataPenulis, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTahun, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -156,7 +165,8 @@ public class JBuku extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtJudul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtJudul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtID))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -215,6 +225,35 @@ public class JBuku extends javax.swing.JFrame {
         // TODO add your handling code here:
         getData();
     }//GEN-LAST:event_tblBukuMouseClicked
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        String judul = txtJudul.getText();
+        int tahun = Integer.parseInt(txtTahun.getText());
+        int stok = Integer.parseInt(txtStok.getText());
+        Penulis p = (Penulis)dataPenulis.getSelectedItem();
+        int id = Integer.parseInt(txtID.getText());
+        
+        Connection.koneksi();
+        String sql = "UPDATE buku SET judul_buku=?, tahun_terbit=?, stok=?, penulis=? WHERE id=?";
+         try {
+            PreparedStatement pms = Connection.conn.prepareStatement(sql);
+            pms.setString(1, judul);
+            pms.setInt(2, tahun);
+            pms.setInt(3, stok);
+            pms.setInt(4, p.getId());
+            pms.setInt(5, id);
+            
+            pms.execute();
+            Connection.stmt.close();
+            showTableData();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_btnEditActionPerformed
 
     public void showComboBox()
     {
@@ -301,19 +340,14 @@ public class JBuku extends javax.swing.JFrame {
             }
         }
         
-        if(targetIndex != -1)
-        {
-            return targetIndex;
-        }
-        else
-        {
-            return 0;
-        }
+       return targetIndex;
     }
     
     public void getData()
     {
         int baris = tblBuku.getSelectedRow();
+        txtID.setVisible(false);
+        txtID.setText(Integer.toString(buku.get(baris).getId()));
         txtJudul.setText(buku.get(baris).getJudulBuku());
         txtTahun.setText(Integer.toString(buku.get(baris).getTahunTerbit()));
         txtStok.setText(Integer.toString(buku.get(baris).getStok()));
@@ -341,6 +375,7 @@ public class JBuku extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable tblBuku;
+    private javax.swing.JLabel txtID;
     private javax.swing.JTextField txtJudul;
     private javax.swing.JTextField txtStok;
     private javax.swing.JTextField txtTahun;
