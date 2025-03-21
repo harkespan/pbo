@@ -22,7 +22,11 @@ public class BangunDatar {
 	{
 		return (panjang*tinggi)/2;
 	}
-	
+
+	public int luas()
+	{
+		return sisi*sisi;
+	}
 	public void cetakLuas(String tipe, double luas)
 	{
 		System.out.println("Luas "+tipe+ " adalah "+luas);
